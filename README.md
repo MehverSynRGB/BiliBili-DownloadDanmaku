@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku/raw/main/docs/icon/256.png" width="20%"/>
-    <h1>BiliBili-弹幕下载 <code>v1.0</code></h1>
+    <h1>BiliBili-弹幕下载 <code>v1.1</code></h1>
     <p>
         <a href='https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
         <a href='https://greasyfork.org/zh-CN/scripts/589645-bilibili-downloaddanmaku'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
@@ -19,6 +19,8 @@
 ## 使用
 
 打开任意B站视频/番剧页面，页面右下角会出现一个蓝色圆形按钮，点击即可下载。
+
+在脚本管理器菜单中选择“设置下载文件名前缀”可为导出文件添加任意前缀；默认不添加前缀，留空可恢复默认。
 
 也可在浏览器控制台中调用：
 

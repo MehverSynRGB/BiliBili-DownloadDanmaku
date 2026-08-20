@@ -2,7 +2,7 @@
 // @name                BiliBili-DownloadDanmaku
 // @name:zh-CN          BiliBili-弹幕下载
 // @namespace           https://github.com/Mehver
-// @version             1.0
+// @version             1.1
 // @description         在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
 // @description:zh-CN   在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
 // @author              https://github.com/Mehver
@@ -18,7 +18,11 @@
 // @contributionURL     https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku
 // @copyright           Copyright (c) 2026 Mehver (https://github.com/Mehver). All rights reserved.
 // @grant               GM_xmlhttpRequest
+// @grant               GM_getValue
+// @grant               GM_setValue
+// @grant               GM_registerMenuCommand
 // @run-at               document-end
+// @noframes
 // ==/UserScript==
 
 (function () {
@@ -352,7 +356,20 @@
   }
 
   /* =============================================================
-   * 4. 解析 cid
+   * 4. 脚本配置
+   * ============================================================= */
+  const DOWNLOAD_FILENAME_PREFIX_KEY = 'downloadFilenamePrefix';
+  let downloadFilenamePrefix = GM_getValue(DOWNLOAD_FILENAME_PREFIX_KEY, '');
+
+  GM_registerMenuCommand('设置下载文件名前缀', () => {
+    const prefix = prompt('请输入下载文件名前缀，留空则不添加前缀。', downloadFilenamePrefix);
+    if (prefix === null) return;
+    downloadFilenamePrefix = prefix;
+    GM_setValue(DOWNLOAD_FILENAME_PREFIX_KEY, prefix);
+  });
+
+  /* =============================================================
+   * 5. 解析 cid
    * ============================================================= */
   async function resolveCid(info) {
     if (info.cid != null) return info;
@@ -454,7 +471,7 @@
   }
 
   /* =============================================================
-   * 5. 下载弹幕主体逻辑
+   * 6. 下载弹幕主体逻辑
    * ============================================================= */
 
   /** 获取 view config (segment 数量 + 特殊弹幕地址) */
@@ -656,7 +673,7 @@
 
     // 下载 — 用原生 Blob + a.click() 方式以弹出浏览器下载窗口
     const safeTitle = (info.title || 'bilibili_danmaku').replace(/[\\/:*?"<>|]/g, '_');
-    const filename = `[bilibili] ${safeTitle}.ass`.substring(0, 250);
+    const filename = `${downloadFilenamePrefix}${safeTitle}.ass`.substring(0, 250);
 
     const bom = '\uFEFF';
     const blob = new Blob([bom + assContent], { type: 'application/octet-stream' });
@@ -677,7 +694,7 @@
   }
 
   /* =============================================================
-   * 6. ASS 字幕生成
+   * 7. ASS 字幕生成
    * ============================================================= */
   function generateASS(danmakuList, info) {
     const playResX = 1920;
@@ -821,7 +838,7 @@
   }
 
   /* =============================================================
-   * 7. 右下角悬浮按钮
+   * 8. 右下角悬浮按钮
    * ============================================================= */
   const FAB_HTML = `
     <div id="bili-dm-dl-wrap" title="下载弹幕 (ASS字幕)"
@@ -874,7 +891,7 @@
   }
 
   /* =============================================================
-   * 8. 初始化
+   * 9. 初始化
    * ============================================================= */
   const global = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
   global.__bili_dm_dl__ = downloadDanmaku;
