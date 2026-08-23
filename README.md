@@ -3,7 +3,7 @@
     <h1>BiliBili-弹幕下载 <code>v1.1</code></h1>
     <p>
         <a href='https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
-        <a href='https://greasyfork.org/zh-CN/scripts/589645-bilibili-downloaddanmaku'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
+        <a href='https://greasyfork.org/scripts/589645'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
     </p>
 </div>
 
