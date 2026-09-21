@@ -2,7 +2,7 @@
 // @name                BiliBili-DownloadDanmaku
 // @name:zh-CN          BiliBili-弹幕下载
 // @namespace           https://github.com/Mehver
-// @version             1.1
+// @version             1.2
 // @description         B站弹幕下载，在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
 // @description:zh-CN   B站弹幕下载，在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
 // @author              https://github.com/Mehver
@@ -191,13 +191,69 @@
   /* =============================================================
    * 2. 页面信息提取
    * ============================================================= */
+  function getRequestedVideoPage(url) {
+    try {
+      const rawPage = new URL(url).searchParams.get('p');
+      const page = rawPage == null || rawPage === '' ? 1 : Number(rawPage);
+      return Number.isInteger(page) && page > 0 ? page : 1;
+    } catch (e) {
+      return 1;
+    }
+  }
+
+  function getVideoIdFromUrl(url) {
+    const match = url.match(/\/video\/(?:[aA][vV](\d+)|([bB][vV][0-9A-Za-z]+))/);
+    return {
+      aid: match && match[1] ? Number(match[1]) : null,
+      bvid: match && match[2] ? 'BV' + match[2].slice(2) : null,
+    };
+  }
+
+  function videoInfoMatchesUrl(info, urlVideoId) {
+    if (urlVideoId.bvid) {
+      const bvid = info && info.bvid ? String(info.bvid) : '';
+      return bvid.length > 2 && 'BV' + bvid.slice(2) === urlVideoId.bvid;
+    }
+    if (urlVideoId.aid) return Number(info && info.aid) === urlVideoId.aid;
+    return true;
+  }
+
+  function selectVideoPage(info) {
+    const requestedPage = info.page || 1;
+    if (!Array.isArray(info.pages) || info.pages.length === 0) {
+      // 顶层 cid 仅代表 1P；其他分 P 必须等待 API 返回 pages 后再选择。
+      if (requestedPage > 1) info.cid = null;
+      return info;
+    }
+
+    const currentPage = info.pages.find(page => Number(page.page) === requestedPage);
+    if (!currentPage || currentPage.cid == null) {
+      throw new Error(`未找到第 ${requestedPage} P（该视频共 ${info.pages.length} P）`);
+    }
+
+    info.cid = currentPage.cid;
+    info.currentPage = currentPage;
+    if (info.videoTitle == null) info.videoTitle = info.title || '';
+    if (info.pages.length > 1) {
+      const partTitle = `P${requestedPage}${currentPage.part ? ' ' + currentPage.part : ''}`;
+      info.title = info.videoTitle ? `${info.videoTitle} - ${partTitle}` : partTitle;
+    } else if (!info.title && currentPage.part) {
+      info.title = currentPage.part;
+    }
+    return info;
+  }
+
   function extractPageInfo() {
     const url = location.href;
     const win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
     const IIS = win.__INITIAL_STATE__;
+    const requestedPage = getRequestedVideoPage(url);
+    const urlVideoId = getVideoIdFromUrl(url);
+    const urlPgcMatch = url.match(/\/bangumi\/play\/(?:ss(\d+)|ep(\d+))/);
+    const isVideoUrl = Boolean(urlVideoId.aid || urlVideoId.bvid);
 
     // ---- 2a. __INITIAL_STATE__ - PGC 番剧 / 电影 / 纪录片 ----
-    if (IIS && IIS.epInfo && IIS.mediaInfo) {
+    if (!isVideoUrl && IIS && IIS.epInfo && IIS.mediaInfo) {
       const ep = IIS.epInfo;
       const m = IIS.mediaInfo;
       return {
@@ -214,16 +270,17 @@
     }
 
     // ---- 2b. __INITIAL_STATE__ - 普通 av/bv 视频 ----
-    if (IIS && IIS.videoData) {
+    if (!urlPgcMatch && IIS && IIS.videoData && videoInfoMatchesUrl(IIS.videoData, urlVideoId)) {
       const vd = IIS.videoData;
-      return {
+      return selectVideoPage({
         type: 'video',
         cid: vd.cid,
         aid: vd.aid,
         bvid: vd.bvid,
         title: vd.title || '',
+        page: requestedPage,
         pages: vd.pages || [],
-      };
+      });
     }
 
     // ---- 2c. #__NEXT_DATA__ (Next.js SSR) 递归搜索 cid ----
@@ -235,7 +292,7 @@
         // 深度优先搜索：在所有嵌套对象中找 { cid, aid/bvid } 或 { cid, id/epid }
         const found = _deepSearchCid(nd);
         if (found) {
-          if (found.epid || found.id) {
+          if (!isVideoUrl && (found.epid || found.id)) {
             return {
               type: 'pgc',
               cid: found.cid,
@@ -248,30 +305,37 @@
               epTitle: found.long_title || found.epTitle || '',
             };
           }
-          return {
-            type: 'video',
-            cid: found.cid,
-            aid: found.aid,
-            bvid: found.bvid,
-            title: found.title || '',
-            pages: found.pages || [],
-          };
+          if (!urlPgcMatch && videoInfoMatchesUrl(found, urlVideoId)) {
+            return selectVideoPage({
+              type: 'video',
+              cid: found.cid,
+              aid: found.aid,
+              bvid: found.bvid,
+              title: found.title || '',
+              page: requestedPage,
+              pages: found.pages || [],
+            });
+          }
         }
       } catch (e) { /* ignore */ }
     }
 
     // ---- 2d. URL 回退 ----
-    let aid = null, bvid = null, epid = null, seasonId = null;
-    const m1 = url.match(/\/video\/(?:[aA][vV](\d+)|([bB][vV][0-9A-Za-z]+))/);
-    if (m1) {
-      if (m1[1]) aid = parseInt(m1[1]);
-      if (m1[2]) bvid = m1[2];
-      return { type: 'video', aid, bvid, cid: null, title: '' };
+    let epid = null, seasonId = null;
+    if (urlVideoId.aid || urlVideoId.bvid) {
+      return {
+        type: 'video',
+        aid: urlVideoId.aid,
+        bvid: urlVideoId.bvid,
+        cid: null,
+        title: '',
+        page: requestedPage,
+        pages: [],
+      };
     }
-    const m2 = url.match(/\/bangumi\/play\/(?:ss(\d+)|ep(\d+))/);
-    if (m2) {
-      if (m2[1]) seasonId = parseInt(m2[1]);
-      if (m2[2]) epid = parseInt(m2[2]);
+    if (urlPgcMatch) {
+      if (urlPgcMatch[1]) seasonId = parseInt(urlPgcMatch[1]);
+      if (urlPgcMatch[2]) epid = parseInt(urlPgcMatch[2]);
       return { type: 'pgc', seasonId, epid, cid: null, aid: null, title: '' };
     }
 
@@ -372,7 +436,12 @@
    * 5. 解析 cid
    * ============================================================= */
   async function resolveCid(info) {
-    if (info.cid != null) return info;
+    if (info.type === 'video') {
+      selectVideoPage(info);
+      if (info.cid != null) return info;
+    } else if (info.cid != null) {
+      return info;
+    }
 
     if (info.type === 'video' && (info.aid || info.bvid)) {
       const param = info.bvid ? `bvid=${info.bvid}` : `aid=${info.aid}`;
@@ -382,8 +451,9 @@
       info.aid = data.data.aid;
       info.bvid = data.data.bvid;
       info.title = data.data.title;
+      info.videoTitle = data.data.title;
       info.pages = data.data.pages;
-      return info;
+      return selectVideoPage(info);
     }
 
     if (info.type === 'pgc') {
@@ -556,7 +626,7 @@
     try {
       info = await resolveCid(info);
       if (!info.cid) throw new Error('无法获取 cid');
-      log('cid:', info.cid, 'title:', info.title);
+      log('cid:', info.cid, '分P:', info.page || 1, 'title:', info.title);
     } catch (e) {
       log('ERROR: ' + e.message);
       alert('[BiliDM] ' + e.message);
@@ -581,15 +651,17 @@
       log(`分段数: ${segmentCount} (来自 API)`);
     } else {
       // 尝试从页面获取时长估算
-      const dur = info.pages && info.pages.length > 0
-        ? info.pages[0].duration
-        : (typeof unsafeWindow !== 'undefined' ? unsafeWindow : window).player
-          ? ((typeof unsafeWindow !== 'undefined' ? unsafeWindow : window).player.getDuration)
-            ? ((typeof unsafeWindow !== 'undefined' ? unsafeWindow : window).player.getDuration() * 1000)
-            : null
+      const win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
+      const currentPage = info.currentPage || (Array.isArray(info.pages)
+        ? info.pages.find(page => String(page.cid) === String(info.cid))
+        : null);
+      const durationSeconds = currentPage && currentPage.duration
+        ? currentPage.duration
+        : win.player && win.player.getDuration
+          ? win.player.getDuration()
           : null;
-      if (dur) {
-        segmentCount = Math.max(1, Math.ceil(dur / 360000));
+      if (durationSeconds) {
+        segmentCount = Math.max(1, Math.ceil(durationSeconds / 360));
       } else {
         // 探测式
         segmentCount = 200;

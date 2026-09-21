@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku/raw/main/docs/icon/256.png" width="20%"/>
-    <h1>BiliBili-弹幕下载 <code>v1.1</code></h1>
+    <h1>BiliBili-弹幕下载 <code>v1.2</code></h1>
     <p>
         <a href='https://github.com/MehverSynRGB/BiliBili-DownloadDanmaku'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
         <a href='https://greasyfork.org/scripts/589645'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
@@ -12,6 +12,7 @@
 在B站任意视频、番剧、电影、纪录片页面右下角，点击悬浮按钮即可下载全部弹幕并导出为ASS字幕文件。
 
 - 支持 AV/BV 号视频
+- 支持通过 `?p=` 参数准确下载多 P 视频的当前分 P 弹幕
 - 支持番剧、电影、纪录片（PGC 页面）
 - 解码完整弹幕含特殊弹幕（BAS 字幕等）
 - 导出标准 ASS 字幕格式，支持滚动/顶部/底部弹幕
