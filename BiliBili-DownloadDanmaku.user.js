@@ -2,9 +2,9 @@
 // @name                BiliBili-DownloadDanmaku
 // @name:zh-CN          BiliBili-弹幕下载
 // @namespace           https://github.com/Mehver
-// @version             1.2
-// @description         B站弹幕下载，在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
-// @description:zh-CN   B站弹幕下载，在任意视频播放页右下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
+// @version             1.3
+// @description         B站弹幕下载，在任意视频播放页左下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
+// @description:zh-CN   B站弹幕下载，在任意视频播放页左下提供弹幕下载按钮，提供较为全面的弹幕抓取能力。
 // @author              https://github.com/Mehver
 // @icon                data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAA1RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiI+CjxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOklwdGM0eG1wQ29yZT0iaHR0cDovL2lwdGMub3JnL3N0ZC9JcHRjNHhtcENvcmUvMS4wL3htbG5zLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSI0MDAwIiBleGlmOlBpeGVsWURpbWVuc2lvbj0iNDAwMCI+CjwvcmRmOkRlc2NyaXB0aW9uPgo8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJ3Ij8+KSSA3QAABChJREFUeJztlXlMVFcUxhW1iks1Nk1M3ZrYVI0L2lg1McYmNHFparWViAtRY21pMy5xizYW1FSjAtVqWhpDAmqAsLgnmrQqo6XKuERFBlSK1GEfmCrDMIAKx+8M9+Hzct/MA//tS37JzHvfOec79577Xpcu/18Gl+UWMf3Ah2ACCAHDQPAb5PwYnAd14AjooxJx0fXADloASTSDbDCng8VngUop18+yiLtMAG5FYZlSsAoEBSgcBGaAO4ocVr1wkkiq6tqIRmABXQ2KdwVfgnJF7DNuQBP2AXcVohci+B9QbWCuASwwMPCJaEqOaQI/gG6acKlC9ACsBCPBUDAeHAC1Cq2TdVLxDwyaYsNr2ooLcZIkKrK0Tr7cUTAIBx5F4ovgLaHraWmdclnDq7mx3ZbhxmVJeEgurtMy34j918fw9kSK4nMVJl3gK9BdlTRHEkcqq7/S82TzUW2W4hzgc3BFuv8cbLUYnRiFgZh2y9Q+pgdIUSxzsRgy/T1++Qzwl8wqBeTx4PkzIOImiO4CHdV5gRLFKwJrQKKY/F1gtjZkUqxq2PSc47nwa2DvhZoZGan5lJniD3tL1mFb9pMf05bRhsS27dl0rWlURkp+iyomLbWgMf5sycxAK+m7kPRXQCbJAG0fpfNRp63/bklV6W4ui8n5aOBvhaPNGAgC20GpSROJWuyYg/aoMYfsVLgl7TVN1raT6SheANaZWgVhpAcYC6aBleAUaJANPNuYRGv3/LUYyafPj7sRFhFjo9EwEb/zD7q67QSdiT5LIQfzmvE8FUwDU8E40PHPOQqOAlatuHNzMk39JZeQrDM4TG2JwsRgcJ8NRO+2+pJ992cZ7bM5TbPuUgW9n1DEsec6Y4BnJIENRMTk+AzkVbrJ6/Waxl7lpk8zHnPsIzl5bzAFTAID/ZjYxQYWxl73GSiq9vgSe+q99NjlocLqOnJ7XhUse9J672ldve//Q2cdfXbSwbEV+qTBIBN4gQdcAMMVxVl3kQ2E6wwcu1dD8045aHJyMYWdKaEHKKIZiLvupInHimnWcQdt/7uS7pS7NQPl+sRfSBPeAn7Xn3P87gkWATdrlsTadAZctCGrgpJya8hWUkv/iW6Z+zCTnu+i6OxKH/lVagPLFWe8QUz9YWGGO3+qPdcb6MgMGG3BELH0Zt+CtNjAAA8lL3OK3UU3y2rpNn7XBzIgTMR1xEC4NIQaN0praQf2OgrLvdlaQZkFLiMDVbKB/uL93mzGwKJYWyMbKNQNnBl4QOec8BkoUx2xQeAoqPJT/AXIDd1/O5MNJN7F4KFrsyRja0KOFrOBy0ZHnY30BaEgAqwWrADz+XjyCwkJ3uMuOvkqbgKhhgbMXkjyLvgapInEe8D3IJJ5p5Vv8fsn0AD4yzgXjHjj4pKRXmCyn+fdQAh4W/X8JXjuyYsdSLwsAAAAAElFTkSuQmCC
 // @match               http*://www.bilibili.com
@@ -21,6 +21,9 @@
 // @grant               GM_getValue
 // @grant               GM_setValue
 // @grant               GM_registerMenuCommand
+// @connect             api.bilibili.com
+// @connect             comment.bilibili.com
+// @connect             *.bilibili.com
 // @run-at               document-end
 // @noframes
 // ==/UserScript==
@@ -389,7 +392,7 @@
           url: url,
           responseType: responseType || 'arraybuffer',
           timeout: 30000,
-          onload: r => resolve(r),
+          onload: r => r.status >= 200 && r.status < 300 ? resolve(r) : reject(new Error('HTTP ' + r.status)),
           onerror: e => reject(e),
           ontimeout: () => reject(new Error('timeout'))
         });
@@ -397,7 +400,7 @@
         fetch(url, { credentials: 'include' })
           .then(r => {
             if (!r.ok) throw new Error('HTTP ' + r.status);
-            return responseType === 'arraybuffer' ? r.arrayBuffer() : r.json();
+            return !responseType || responseType === 'arraybuffer' ? r.arrayBuffer() : r.text();
           })
           .then(d => resolve({ response: d }))
           .catch(reject);
@@ -424,12 +427,30 @@
    * ============================================================= */
   const DOWNLOAD_FILENAME_PREFIX_KEY = 'downloadFilenamePrefix';
   let downloadFilenamePrefix = GM_getValue(DOWNLOAD_FILENAME_PREFIX_KEY, '');
+  const FAB_POSITION_KEY = 'fabPosition';
+  const savedFABPosition = GM_getValue(FAB_POSITION_KEY, { x: 10, y: 10 });
+  let fabPosition = savedFABPosition && Number.isFinite(savedFABPosition.x) && Number.isFinite(savedFABPosition.y)
+    ? savedFABPosition : { x: 10, y: 10 };
 
   GM_registerMenuCommand('设置下载文件名前缀', () => {
     const prefix = prompt('请输入下载文件名前缀，留空则不添加前缀。', downloadFilenamePrefix);
     if (prefix === null) return;
     downloadFilenamePrefix = prefix;
     GM_setValue(DOWNLOAD_FILENAME_PREFIX_KEY, prefix);
+  });
+
+  GM_registerMenuCommand('设置悬浮按钮位置', () => {
+    const input = prompt('请输入相对左下角的偏移量 x,y（像素；向右、向上为正），留空恢复默认 10,10。', `${fabPosition.x},${fabPosition.y}`);
+    if (input === null) return;
+    const parts = input.trim() ? input.split(/[,，]/).map(part => part.trim()) : ['10', '10'];
+    const values = parts.map(Number);
+    if (parts.length !== 2 || parts.some(part => !part) || values.some(value => !Number.isFinite(value))) {
+      alert('位置格式无效，请输入两个有限数字，以逗号分隔，例如 100,50。');
+      return;
+    }
+    fabPosition = { x: values[0], y: values[1] };
+    GM_setValue(FAB_POSITION_KEY, fabPosition);
+    applyFABPosition();
   });
 
   /* =============================================================
@@ -575,31 +596,35 @@
     return all;
   }
 
-  let _btnEl = null;
-  let _btnTextEl = null;
-  let _btnIconEl = null;
+  let _buttons = [];
 
   let _downloading = false;
 
   function setBtnState(state) {
-    if (!_btnEl) return;
-    const s = {
-      idle:    { bg: '#00a1d6', text: '',          pointer: '',        opacity: '' },
-      loading: { bg: '#ffb027', text: '',          pointer: 'wait',    opacity: '0.8' },
-      done:    { bg: '#00a1d6', text: '',          pointer: '',        opacity: '' },
-      error:   { bg: '#e74c3c', text: '',          pointer: '',        opacity: '' },
-    }[state] || { bg: '#00a1d6', text: '', pointer: '', opacity: '' };
-    _btnEl.style.background = s.bg;
-    _btnEl.style.cursor = s.pointer || 'pointer';
-    _btnEl.style.opacity = s.opacity || '1';
-    if (_btnTextEl && _btnTextEl.style.display === 'block') {
-      const labels = { idle:'下载弹幕', loading:'加载中…', done:'下载完成', error:'下载失败' };
-      _btnTextEl.textContent = labels[state] || '下载弹幕';
+    for (const button of _buttons) {
+      button.disabled = state === 'loading';
+      button.style.background = state === 'loading' ? '#ffb027' : state === 'error' ? '#e74c3c' : '#00a1d6';
+      button.style.cursor = state === 'loading' ? 'wait' : 'pointer';
     }
   }
 
+  function saveDownload(info, extension, content) {
+    const safeTitle = (info.title || 'bilibili_danmaku').replace(/[\\/:*?"<>|]/g, '_');
+    const suffix = '.' + extension;
+    const filename = `${downloadFilenamePrefix}${safeTitle}`.substring(0, 250 - suffix.length) + suffix;
+    const url = URL.createObjectURL(new Blob([content], { type: 'application/octet-stream' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 120000);
+    return filename;
+  }
+
   /** 主下载函数 */
-  async function downloadDanmaku() {
+  async function downloadDanmaku(format = 'ass') {
     const log = (...args) => console.log('[BiliDM]', ...args);
 
     if (_downloading) {
@@ -609,29 +634,39 @@
     _downloading = true;
     setBtnState('loading');
 
-    log('开始分析页面...');
-    let info;
     try {
-      info = extractPageInfo();
-      if (!info) throw new Error('未检测到视频页面，请在 AV/BV 视频或番剧播放页使用');
-      log('页面类型:', info.type);
+      await performDownload(format, log);
     } catch (e) {
       log('ERROR: ' + e.message);
       alert('[BiliDM] ' + e.message);
       setBtnState('error');
+    } finally {
       _downloading = false;
-      return;
+      for (const button of _buttons) button.disabled = false;
     }
+  }
 
-    try {
-      info = await resolveCid(info);
-      if (!info.cid) throw new Error('无法获取 cid');
-      log('cid:', info.cid, '分P:', info.page || 1, 'title:', info.title);
-    } catch (e) {
-      log('ERROR: ' + e.message);
-      alert('[BiliDM] ' + e.message);
-      setBtnState('error');
-      _downloading = false;
+  async function performDownload(format, log) {
+    log('开始分析页面...');
+    let info = extractPageInfo();
+    if (!info) throw new Error('未检测到视频页面，请在 AV/BV 视频或番剧播放页使用');
+    log('页面类型:', info.type);
+
+    info = await resolveCid(info);
+    if (!info.cid) throw new Error('无法获取 cid');
+    log('cid:', info.cid, '分P:', info.page || 1, 'title:', info.title);
+
+    if (format === 'xml') {
+      const response = await apiGet(`https://comment.bilibili.com/${info.cid}.xml`, 'arraybuffer');
+      const bytes = response.response;
+      if (!bytes || !bytes.byteLength) throw new Error('XML 响应为空');
+      const xml = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+      const doc = new DOMParser().parseFromString(xml, 'application/xml');
+      if (!doc.documentElement || doc.documentElement.nodeName !== 'i' || doc.getElementsByTagName('parsererror').length) {
+        throw new Error('响应不是有效的弹幕 XML');
+      }
+      log('下载已触发 → ' + saveDownload(info, 'xml', bytes));
+      setBtnState('done');
       return;
     }
 
@@ -736,33 +771,15 @@
     if (unique.length === 0) {
       alert('[BiliDM] 未获取到任何弹幕');
       setBtnState('error');
-      _downloading = false;
       return;
     }
 
     // 生成 ASS
     const assContent = generateASS(unique, info);
 
-    // 下载 — 用原生 Blob + a.click() 方式以弹出浏览器下载窗口
-    const safeTitle = (info.title || 'bilibili_danmaku').replace(/[\\/:*?"<>|]/g, '_');
-    const filename = `${downloadFilenamePrefix}${safeTitle}.ass`.substring(0, 250);
-
-    const bom = '\uFEFF';
-    const blob = new Blob([bom + assContent], { type: 'application/octet-stream' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    // 延迟 revoke 以确保浏览器已开始下载
-    setTimeout(() => URL.revokeObjectURL(url), 120000);
+    const filename = saveDownload(info, 'ass', '\uFEFF' + assContent);
     log(`下载已触发 → ${filename} (${unique.length} 条弹幕)`);
     setBtnState('done');
-    _downloading = false;
   }
 
   /* =============================================================
@@ -910,31 +927,31 @@
   }
 
   /* =============================================================
-   * 8. 右下角悬浮按钮
+   * 8. 左下角悬浮按钮
    * ============================================================= */
   const FAB_HTML = `
-    <div id="bili-dm-dl-wrap" title="下载弹幕 (ASS字幕)"
-         style="position:fixed;bottom:80px;right:24px;z-index:9999;
-                width:44px;height:44px;border-radius:50%;
-                background:#00a1d6;color:#fff;cursor:pointer;
-                display:flex;align-items:center;justify-content:center;
-                box-shadow:0 2px 10px rgba(0,161,214,0.4);
-                transition:transform 0.15s,opacity 0.15s,background 0.15s;
-                user-select:none;"
-         onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 4px 16px rgba(0,161,214,0.55)'"
-         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 10px rgba(0,161,214,0.4)'">
-      <svg id="bili-dm-dl-icon" width="24" height="24" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-              d="M14.045 25.545c-6.351 0-11.5-5.149-11.5-11.5s5.149-11.5 11.5-11.5 11.5 5.149 11.5 11.5-5.149 11.5-11.5 11.5zm-.955-17.18v5.457l-2.703-2.612a.906.906 0 10-1.255 1.305l4.213 4.052a.907.907 0 001.23 0l4.212-4.052a.906.906 0 00-1.255-1.305l-2.532 2.447V8.364a.906.906 0 00-1.812 0z"
-              fill="currentColor"/>
-      </svg>
-      <span id="bili-dm-dl-text"
-            style="display:none;position:absolute;bottom:48px;right:0;
-                   background:rgba(0,0,0,0.75);color:#fff;font-size:12px;
-                   padding:4px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;">
-        下载弹幕
-      </span>
+    <div id="bili-dm-dl-wrap" role="group" aria-label="弹幕下载"
+         style="position:fixed;bottom:8px;left:8px;z-index:9999;
+                display:flex;flex-direction:column;gap:4px;padding:4px;border-radius:28px;
+                background:#d9f4fc;box-shadow:0 2px 10px rgba(0,161,214,0.4);">
+      <button type="button" id="bili-dm-dl-ass" title="下载 ASS 弹幕字幕" aria-label="下载 ASS 弹幕字幕"
+              style="width:44px;height:44px;border:0;border-radius:50%;background:#00a1d6;color:white;font:bold 11px sans-serif;cursor:pointer;">ASS</button>
+      <button type="button" id="bili-dm-dl-xml" title="下载原版 XML 弹幕" aria-label="下载原版 XML 弹幕"
+              style="width:44px;height:44px;border:0;border-radius:50%;background:#00a1d6;color:white;font:bold 11px sans-serif;cursor:pointer;">XML</button>
     </div>`;
+
+  function applyFABPosition() {
+    const fab = document.getElementById('bili-dm-dl-wrap');
+    if (!fab) return;
+    const rect = fab.getBoundingClientRect();
+    const clamp = (value, size, viewport) => {
+      const min = Math.min(8, Math.max(0, viewport - size));
+      const max = Math.max(min, viewport - size - 8);
+      return Math.max(min, Math.min(value + 8, max));
+    };
+    fab.style.left = `${clamp(fabPosition.x, rect.width, window.innerWidth)}px`;
+    fab.style.bottom = `${clamp(fabPosition.y, rect.height, window.innerHeight)}px`;
+  }
 
   function injectFAB() {
     if (document.getElementById('bili-dm-dl-wrap')) return;
@@ -943,23 +960,14 @@
     temp.innerHTML = FAB_HTML;
     const fab = temp.firstElementChild;
     document.body.appendChild(fab);
+    applyFABPosition();
 
-    _btnEl = fab;
-    _btnIconEl = document.getElementById('bili-dm-dl-icon');
-    _btnTextEl = document.getElementById('bili-dm-dl-text');
-
-    fab.addEventListener('click', e => {
+    _buttons = [document.getElementById('bili-dm-dl-ass'), document.getElementById('bili-dm-dl-xml')];
+    _buttons.forEach((button, index) => button.addEventListener('click', e => {
       e.stopPropagation();
-      downloadDanmaku();
-    });
-
-    // 鼠标悬停显示文字提示
-    fab.addEventListener('mouseenter', () => {
-      if (_btnTextEl) _btnTextEl.style.display = 'block';
-    });
-    fab.addEventListener('mouseleave', () => {
-      if (_btnTextEl) _btnTextEl.style.display = 'none';
-    });
+      downloadDanmaku(index === 0 ? 'ass' : 'xml');
+    }));
+    if (_downloading) setBtnState('loading');
   }
 
   /* =============================================================
@@ -967,6 +975,7 @@
    * ============================================================= */
   const global = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
   global.__bili_dm_dl__ = downloadDanmaku;
+  window.addEventListener('resize', applyFABPosition);
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     injectFAB();
